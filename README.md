@@ -79,6 +79,89 @@ ORDER BY SUM(total_price) DESC
 ```
 We visualized this in Power BI with the following pie charts:
 
-![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/ae72ccc9-cfcd-4de7-9f0b-0608debac323)
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/b9304d2c-8c10-43b2-8c1e-705c4475274f)
+
+### Total orders for each category of pizza
+The following SQL query calculates how many pizzas were ordered in total for each category, and then orders them in descending order.
+
+```
+-- Total orders by category of pizza
+SELECT pizza_category, SUM(Quantity) AS total_orders
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_category
+ORDER BY SUM(total_price) DESC
+```
+In Power BI, the following visual was created to illustrate this information.
+
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/6a1a805a-d0a7-4748-9ca0-e0bafdcb0c76)
+
+### Top and bottom 5 pizzas
+Finally, we calculated and created a visualization for the top 5 pizzas by quantity sold, number of orders that contained the pizza, and revenue, respectively. The last query contains a CTE (common table expression) because the total revenue by pizza name had to be calculated first.
+```
+--Top 5 Pizzas by quantity sold
+SELECT TOP 5 pizza_name, SUM(Quantity) AS total_units_sold
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name
+ORDER BY SUM(Quantity) DESC
+
+--Top 5 pizzas by orders
+SELECT TOP 5 pizza_name, COUNT(DISTINCT(order_id)) number_of_orders
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name
+ORDER BY number_of_orders DESC
+
+--Top 5 pizzas by revenue
+WITH a as (
+SELECT pizza_name, pizza_size, unit_price, 
+SUM(quantity) number_of_pizzas_sold, SUM(quantity)*unit_price revenue
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name, pizza_size, unit_price)
+
+SELECT TOP 5 pizza_name, SUM(revenue) total_revenue
+FROM a
+GROUP BY pizza_name
+ORDER BY total_revenue DESC
+```
+The results are illustrated with Power BI visualizations below:
+
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/0827b592-e746-4b90-aa2e-af1cb64e41e1)
+
+Similarly, the bottom 5 pizzas are obtained with the following queries
+```
+--Bottom 5 Pizzas by quantity sold
+SELECT TOP 5 pizza_name, SUM(Quantity) AS total_units_sold
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name
+ORDER BY SUM(Quantity) ASC
+
+--Bottom 5 pizzas by orders
+SELECT TOP 5 pizza_name, COUNT(DISTINCT(order_id)) number_of_orders
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name
+ORDER BY number_of_orders ASC
+
+--Bottom 5 pizzas by revenue
+WITH a as (
+SELECT pizza_name, pizza_size, unit_price, 
+SUM(quantity) number_of_pizzas_sold, SUM(quantity)*unit_price revenue
+FROM PizzaStore.dbo.pizza_sales
+GROUP BY pizza_name, pizza_size, unit_price)
+
+SELECT TOP 5 pizza_name, SUM(revenue) total_revenue
+FROM a
+GROUP BY pizza_name
+ORDER BY total_revenue ASC
+```
+The image below shows the Power BI visaulization of these values:
+
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/8894e966-d0ef-49cc-95d9-6fe885715aed)
 
 ## Power BI Dashboard
+
+The full dashboard created in Power BI is presented below. It is presented in two pages: one for the trends and totals calculated, and one for the top and bottom 5 pizzas by the selected categories.
+
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/64c2b818-49eb-4c7f-8995-9d162ef5af1e)
+
+![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/7dc2c56f-16eb-420b-8921-27d209850124)
+
+
