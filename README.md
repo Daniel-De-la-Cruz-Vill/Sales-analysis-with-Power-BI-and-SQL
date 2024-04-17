@@ -1,5 +1,5 @@
 # **Pizza sales analysis with Power BI and SQL**
-In this project, we analyzed data from sales of a pizza store in 2015.  SQL queries were used to calculate KPIs and other important data relating to those sales, and then Power BI was used to create a dashboard 
+In this project, we analyzed data from sales of a pizza store in 2015.  SQL queries were used to calculate KPIs and other important data relating to those sales. Power BI was then used to create a dashboard 
 to visualize those values. The data-related questions answered in this project are the following:
 
 1. What are the total revenue, average order cost, average number of pizzas per order,  total orders, and total pizzas sold?
@@ -158,7 +158,7 @@ The image below shows the Power BI visaulization of these values:
 
 ## Power BI Dashboard
 
-The full dashboard created in Power BI is presented below. It is presented in two pages: one for the trends and totals calculated, and one for the top and bottom 5 pizzas by the selected categories.
+The full dashboard created in Power BI is presented below. It is presented on two pages: one for the trends and totals calculated, and one for the top and bottom 5 pizzas by the selected categories.
 
 ![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/64c2b818-49eb-4c7f-8995-9d162ef5af1e)
 
