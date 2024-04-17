@@ -152,7 +152,7 @@ FROM a
 GROUP BY pizza_name
 ORDER BY total_revenue ASC
 ```
-The image below shows the Power BI visaulization of these values:
+The image below shows the Power BI visualization of these values:
 
 ![image](https://github.com/Daniel-De-la-Cruz-Vill/Sales-analysis-with-Power-BI-and-SQL/assets/157164355/8894e966-d0ef-49cc-95d9-6fe885715aed)
 
